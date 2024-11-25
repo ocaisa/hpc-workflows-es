@@ -5,17 +5,23 @@ exercises: 30
 ---
 
 
+
 ::: questions
+
 
 - "¿Cómo ejecuto un comando simple con Snakemake?"
 
 :::
 
+
+
 :::objectives
+
 
 - "Crea una receta de Snakemake (un Snakefile)"
 
 :::
+
 
 ## ¿Cuál es el flujo de trabajo que me interesa?
 
@@ -66,7 +72,9 @@ rule hostname_login:
         "hostname > hostname_login.txt"
 ```
 
+
 ::: callout
+
 
 ## Puntos clave sobre este archivo
 
@@ -90,6 +98,7 @@ rule hostname_login:
 
 :::
 
+
 De vuelta en el shell ejecutaremos nuestra nueva regla. En este punto, si faltaran
 comillas, sangrías incorrectas, etc., podríamos ver un error.
 
@@ -97,7 +106,9 @@ comillas, sangrías incorrectas, etc., podríamos ver un error.
 snakemake -j1 -p hostname_login
 ```
 
+
 ::: callout
+
 
 ## `bash: snakemake: command not found...`
 
@@ -150,30 +161,50 @@ y luego asegúrate de que tenemos el comando `snakemake` disponible
 ```bash
 snakemake -j1 -p hostname_login
 ```
+
 :::
 
+
+
 ::: challenge
+
 ## Ejecutando Snakemake
 
 Ejecute `snakemake --help | less` para ver la ayuda de todas las opciones disponibles.
 ¿Qué hace la opción `-p` en el comando `snakemake` anterior?
 
-1. Protege los ficheros de salida existentes
+1. Protege los archivos de salida existentes
 1. Imprime en el terminal los comandos shell que se están ejecutando
 1. Le dice a Snakemake que sólo ejecute un proceso a la vez
 1. Solicita al usuario el fichero de entrada correcto
 
-:::::: hint You can search in the text by pressing <kbd>/</kbd>, and quit back to the
-shell with <kbd>q</kbd>. ::::::
+:::::: hint
 
-:::::: solution (2) Prints the shell commands that are being run to the terminal
+Puedes buscar en el texto pulsando <kbd>/</kbd>, y salir de nuevo al shell con
+<kbd>q</kbd>.
+
+::::::
+
+
+
+:::::: solution
+
+(2) Imprime en el terminal los comandos shell que se están ejecutando
 
 ¡Esto es tan útil que no sabemos por qué no está por defecto! La opción `-j1` es lo que
 le dice a Snakemake que sólo ejecute un proceso a la vez, y nos quedaremos con esto por
-ahora ya que hace las cosas más simples. La respuesta 4 es un engaño total, ya que
-Snakemake nunca pide interactivamente la entrada del usuario. :::::: :::
+ahora ya que hace las cosas más simples. La respuesta 4 es una pista falsa, ya que
+Snakemake nunca solicita interactivamente la entrada del usuario.
+
+::::::
+
+
+:::
+
+
 
 ::: keypoints
+
 
 - "Antes de ejecutar Snakemake necesitas escribir un Snakefile"
 - "Un Snakefile es un archivo de texto que define una lista de reglas"
@@ -182,4 +213,5 @@ Snakemake nunca pide interactivamente la entrada del usuario. :::::: :::
   regla apropiada"
 
 :::
+
 

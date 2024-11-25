@@ -5,23 +5,31 @@ exercises: 20
 ---
 
 
+
 ::: objectives
+
 
 - "Define reglas para ejecutar localmente y en el clúster"
 
 :::
 
+
+
 ::: questions
+
 
 - "¿Cómo puedo ejecutar una aplicación MPI a través de Snakemake en el cluster?"
 
 :::
 
+
 Ahora es el momento de volver a nuestro flujo de trabajo real. Podemos ejecutar un
 comando en el cluster, pero ¿qué pasa con la ejecución de la aplicación MPI que nos
 interesa? Nuestra aplicación se llama `amdahl` y está disponible como módulo de entorno.
 
+
 ::: challenge
+
 
 Localiza y carga el módulo `amdahl` y luego _reemplaza_ nuestra regla `hostname_remote`
 con una versión que ejecute `amdahl`. (No te preocupes por el MPI paralelo todavía,
@@ -30,7 +38,9 @@ ejecútalo con una sola CPU, `mpiexec -n 1 amdahl`).
 ¿Se ejecuta correctamente la regla? Si no es así, revise los archivos de registro para
 averiguar por qué
 
+
 ::::::solution
+
 
 ```bash
 module spider amdahl
@@ -75,7 +85,12 @@ Snakemake no encontró el ejecutable. Esto se debe a que la regla de Snakemake s
 ejecutando en un _entorno de ejecución_ limpio, y tenemos que decirle de alguna manera
 que cargue el módulo de entorno necesario antes de intentar ejecutar la regla.
 
-:::::: :::
+
+::::::
+
+
+:::
+
 
 ## Snakemake y módulos de entorno
 
@@ -107,12 +122,16 @@ una opción adicional
 snakemake --profile cluster_profile --use-envmodules amdahl_run
 ```
 
+
 ::: challenge
+
 
 Utilizaremos módulos de entorno durante el resto del tutorial, así que conviértalo en
 una opción predeterminada de nuestro perfil (estableciendo su valor en `True`)
 
+
 ::::::solution
+
 
 Actualiza el perfil de nuestro clúster a
 
@@ -129,9 +148,13 @@ use-envmodules: True
 Si quieres probarlo, tienes que borrar el archivo de salida de la regla y volver a
 ejecutar Snakemake.
 
+
 ::::::
 
+
+
 :::
+
 
 ## Snakemake y MPI
 
@@ -172,7 +195,7 @@ rule amdahl_run:
 Ha funcionado, pero ahora tenemos un pequeño problema. Queremos hacer esto para algunos
 valores diferentes de `tasks` que significaría que necesitaríamos un archivo de salida
 diferente para cada ejecución. Sería genial si de alguna manera podemos indicar en el
-`output` el valor que queremos utilizar para `tasks` ... y tener Snakemake recoger eso.
+`output` el valor que queremos utilizar para `tasks` ... y que Snakemake lo recoja.
 
 Podríamos utilizar un _wildcard_ en el `output` para permitirnos definir el `tasks` que
 deseamos utilizar. La sintaxis de este comodín es la siguiente
@@ -183,7 +206,9 @@ output: "amdahl_run_{parallel_tasks}.txt"
 
 donde `parallel_tasks` es nuestro comodín.
 
+
 ::: callout
+
 ## Comodines
 
 Los comodines se utilizan en las líneas `input` y `output` de la regla para representar
@@ -198,7 +223,9 @@ Si dos reglas usan un comodín con el mismo nombre entonces Snakemake las tratar
 entidades diferentes - las reglas en Snakemake son autocontenidas de esta manera.
 
 En la línea `shell` puede hacer referencia al comodín con `{wildcards.parallel_tasks}`
+
 :::
+
 
 ## Orden de operaciones de Snakemake
 
@@ -221,6 +248,7 @@ Snakemake está haciendo exactamente cuando se ejecuta. Hay tres fases distintas
        salida según lo esperado
 
 ::: callout
+
 ## Modo de ejecución en seco (`-n`)
 
 A menudo es útil ejecutar sólo las dos primeras fases, de modo que Snakemake planificará
@@ -231,7 +259,9 @@ realmente. Esto se hace con la bandera `-n`, eg:
 > $ snakemake -n ...
 ```
 
+
 :::
+
 
 La cantidad de comprobaciones puede parecer pedante ahora mismo, pero a medida que el
 flujo de trabajo gane más pasos esto nos resultará realmente muy útil.
@@ -317,7 +347,9 @@ rule amdahl_run:
 Ahora tenemos una regla que puede utilizarse para generar la salida de ejecuciones de un
 número arbitrario de tareas paralelas.
 
+
 ::: callout
+
 
 ## Comentarios en Snakefiles
 
@@ -326,7 +358,9 @@ que ya tengas el hábito de añadir comentarios a tus propios scripts. Los bueno
 comentarios hacen que cualquier script sea más legible, y esto es igual de cierto con
 los Snakefiles.
 
+
 :::
+
 
 Dado que nuestra regla es ahora capaz de generar un número arbitrario de ficheros de
 salida las cosas podrían llenarse mucho en nuestro directorio actual. Probablemente sea
@@ -351,7 +385,9 @@ rule amdahl_run:
         "{resources.mpi} -n {resources.tasks} amdahl > {output}"
 ```
 
+
 ::: challenge
+
 
 Crea un fichero de salida (en la carpeta `runs`) para el caso en que tengamos 6 tareas
 paralelas
@@ -359,15 +395,21 @@ paralelas
 (SUGERENCIA: Recuerde que Snakemake tiene que ser capaz de hacer coincidir el archivo
 solicitado con el `output` de una regla)
 
+
 :::::: solution
+
 
 ```bash
 snakemake --profile cluster_profile runs/amdahl_run_6.txt
 ```
 
+
 ::::::
 
+
+
 :::
+
 
 Otra cosa sobre nuestra aplicación `amdahl` es que en última instancia queremos procesar
 la salida para generar nuestro gráfico de escala. La salida en este momento es útil para
@@ -440,26 +482,37 @@ rule amdahl_run:
         "{resources.mpi} -n {resources.tasks} amdahl --terse -p {wildcards.parallel_proportion} > {output}"
 ```
 
+
 ::: challenge
+
 
 Crea un fichero de salida para un valor de `-p` de 0.999 (el valor por defecto es 0.8)
 para el caso en que tengamos 6 tareas paralelas.
 
+
 :::::: solution
+
 
 ```bash
 snakemake --profile cluster_profile p_0.999/runs/amdahl_run_6.json
 ```
 
+
 ::::::
+
+
 
 :::
 
+
+
 ::: keypoints
+
 
 - "Snakemake elige la regla apropiada mediante la sustitución de comodines de tal manera
   que la salida coincide con el objetivo"
 - "Snakemake comprueba varias condiciones de error y se detendrá si ve un problema"
 
 :::
+
 

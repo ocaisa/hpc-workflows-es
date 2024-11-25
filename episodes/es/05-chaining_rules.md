@@ -5,18 +5,24 @@ exercises: 30
 ---
 
 
+
 ::: questions
+
 
 - "¿Cómo combino reglas en un flujo de trabajo?"
 - "¿Cómo hago una regla con múltiples entradas y salidas?"
 
 :::
 
+
+
 ::: objectives
+
 
 - ""
 
 :::
+
 
 ## Una cadena de múltiples reglas
 
@@ -45,13 +51,17 @@ rule generate_run_files:
         "echo {input} done > {output}"
 ```
 
+
 ::: challenge
+
 
 La nueva regla no está haciendo ningún trabajo, sólo se está asegurando de que creamos
 el archivo que queremos. No vale la pena ejecutarla en el cluster. ¿Cómo asegurarse de
 que se ejecuta sólo en el nodo de inicio de sesión?
 
+
 :::::: solution
+
 
 Necesitamos añadir la nueva regla a nuestro `localrules`:
 
@@ -59,9 +69,13 @@ Necesitamos añadir la nueva regla a nuestro `localrules`:
 localrules: hostname_login, generate_run_files
 ```
 
-:::
 
 :::
+
+
+
+:::
+
 
 Ahora vamos a ejecutar la nueva regla (recuerda que tenemos que solicitar el archivo de
 salida por su nombre ya que `output` en nuestra regla contiene un patrón comodín):
@@ -149,7 +163,9 @@ acostumbrarse. En lugar de enumerar los pasos en orden de ejecución, siempre se
 viene determinado por la aplicación de las reglas de concordancia de patrones a los
 nombres de archivo, no por el orden de las reglas en el archivo Snakefile.
 
+
 ::: callout
+
 
 ## ¿Salidas primero?
 
@@ -161,9 +177,13 @@ Muchos usuarios de Snakemake, y de hecho la documentación oficial, prefieren te
 `input` primero, por lo que en la práctica se debe utilizar cualquier orden que tenga
 sentido para usted.
 
+
 :::
 
+
+
 ::: callout
+
 
 ## `log` salidas en Snakemake
 
@@ -175,9 +195,13 @@ mirar el registro para ayudar a diagnosticar el error. En un flujo de trabajo re
 puede ser muy útil, pero en términos de aprendizaje de los fundamentos de Snakemake nos
 quedaremos con los campos regulares `input` y `output` aquí.
 
+
 :::
 
+
+
 ::: callout
+
 
 ## Los errores son normales
 
@@ -189,11 +213,15 @@ rápidamente cuando hay un problema, en lugar de seguir adelante y potencialment
 ejecutar cálculos basura sobre datos parciales o corruptos. Otra ventaja es que cuando
 un paso falla, podemos reanudarlo con seguridad desde donde lo dejamos.
 
+
 :::
 
 
 
+
+
 ::: keypoints
+
 
 - "Snakemake enlaza reglas buscando iterativamente reglas que tengan entradas faltantes"
 - "Las reglas pueden tener múltiples entradas y/o salidas con nombre"
@@ -201,4 +229,5 @@ un paso falla, podemos reanudarlo con seguridad desde donde lo dejamos.
   considerará como un fallo"
 
 :::
+
 

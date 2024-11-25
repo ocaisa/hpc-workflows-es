@@ -5,19 +5,25 @@ exercises: 30
 ---
 
 
+
 ::: questions
+
 
 - "¿Cómo puedo procesar varios archivos a la vez?"
 - "¿Cómo combino varios archivos?"
 
 :::
 
+
+
 ::: objectives
+
 
 - "Usa Snakemake para procesar todas nuestras muestras a la vez"
 - "Haz un gráfico de escalabilidad que agrupe nuestros resultados"
 
 :::
+
 
 Hemos creado una regla que puede generar un único archivo de salida, pero no vamos a
 crear varias reglas para cada archivo de salida. Queremos generar todos los archivos de
@@ -88,7 +94,9 @@ Si no especifica un nombre de regla de destino o cualquier nombre de archivo en 
 de comandos cuando se ejecuta Snakemake, el valor predeterminado es utilizar ** la
 primera regla ** en el Snakefile como el objetivo.
 
+
 ::: callout
+
 ## Reglas como destinos
 
 Dar el nombre de una regla a Snakemake en la línea de comandos sólo funciona cuando esa
@@ -98,7 +106,9 @@ pueden contener comodines" Esto también puede ocurrir cuando no se proporciona 
 objetivo explícito en la línea de comandos, y Snakemake intenta ejecutar la primera
 regla definida en el archivo Snakefile.
 
+
 :::
+
 
 ## Reglas que combinan varias entradas
 
@@ -109,7 +119,7 @@ función de `NTASK_SIZES`.
 En nuestro flujo de trabajo el paso final es tomar todos los archivos generados y
 combinarlos en un gráfico. Para ello, es posible que haya oído que algunas personas
 utilizan una biblioteca de Python llamada `matplotlib`. Está más allá del alcance de
-este tutorial escribir el script de python para crear un gráfico final, por lo que te
+este tutorial escribir el script de python para crear un gráfico final, así que te
 proporcionamos el script como parte de esta lección. Puede descargarlo con
 
 ```bash
@@ -132,12 +142,16 @@ rule generate_run_files:
         "python plot_terse_amdahl_results.py --output {output} {input}"
 ```
 
+
 ::: challenge
+
 
 Este script depende de `matplotlib`, ¿está disponible como módulo de entorno? Añada este
 requisito a nuestra regla.
 
+
 :::::: solution
+
 
 ```python
 rule generate_run_files:
@@ -149,9 +163,13 @@ rule generate_run_files:
         "python plot_terse_amdahl_results.py --output {output} {input}"
 ```
 
+
 ::::::
 
+
+
 :::
+
 
 ¡Por fin podemos generar un gráfico de escala! Ejecute el último comando de Snakemake:
 
@@ -159,46 +177,70 @@ rule generate_run_files:
 snakemake --profile cluster_profile/ p_0.999_scalability.jpg
 ```
 
+
 ::: challenge
+
 
 Genera el gráfico de escalabilidad para todos los valores de 1 a 10 núcleos.
 
+
 :::::: solution
+
 
 ```python
 NTASK_SIZES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 ```
 
+
 ::::::
+
+
 
 :::
 
+
+
 ::: challenge
+
 
 Vuelva a ejecutar el flujo de trabajo para un valor `p` de 0.8
 
+
 :::::: solution
+
 
 ```bash
 snakemake --profile cluster_profile/ p_0.8_scalability.jpg
 ```
 
+
 ::::::
+
+
 
 :::
 
+
+
 ::: challenge
+
 
 ## Ronda de bonificación
 
-Crea una regla final que puede ser llamada directamente y genera un gráfico de escala
-para 3 valores diferentes de `p`. :::
+Cree una regla final que pueda llamarse directamente y genere un gráfico de escala para
+3 valores diferentes de `p`.
+
+:::
+
+
 
 ::: keypoints
+
 
 - "Utilice la función `expand()` para generar listas de nombres de archivo que desee
   combinar"
 - "Cualquier `{input}` de una regla puede ser una lista de longitud variable"
 
 :::
+
 

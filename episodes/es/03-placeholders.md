@@ -5,17 +5,23 @@ exercises: 30
 ---
 
 
+
 ::: questions
+
 
 - "¿Cómo hago una regla genérica?"
 
 :::
 
+
+
 ::: objectives
+
 
 - "Mira cómo Snakemake trata algunos errores"
 
 :::
+
 
 Nuestro Snakefile tiene algunos duplicados. Por ejemplo, los nombres de los archivos de
 texto se repiten en algunos lugares a lo largo de las reglas del Snakefile. Los
@@ -23,16 +29,21 @@ Snakefiles son una forma de código y, en cualquier código, la repetición pued
 a problemas (por ejemplo, renombramos un archivo de datos en una parte del Snakefile
 pero olvidamos renombrarlo en otro lugar).
 
+
 ::: callout
+
 ## D.R.Y. (Don't Repeat Yourself) (No te repitas)
 
 En muchos lenguajes de programación, la mayor parte de las características del lenguaje
 están ahí para permitir al programador describir rutinas computacionales largas como
-código corto, expresivo y hermoso. Las características de Python, R o Java, como las
+código corto, expresivo y bonito. Las características de Python, R o Java, como las
 variables y funciones definidas por el usuario, son útiles en parte porque nos evitan
 tener que escribir (o pensar) en todos los detalles una y otra vez. Este buen hábito de
 escribir las cosas sólo una vez se conoce como el principio de "No te repitas" o D.R.Y.
+(por sus siglas en inglés).
+
 :::
+
 
 Vamos a eliminar algunas de las repeticiones de nuestro archivo Snakefile.
 
@@ -75,11 +86,14 @@ ejecutar el comando.
 `{resources}` también es un marcador de posición, y podemos acceder a un elemento con
 nombre del `{resources}` con la notación `{resources.runtime}` (por ejemplo).
 
+
 :::keypoints
+
 
 - "Las reglas de Snakemake se hacen más genéricas con marcadores de posición"
 - "Los marcadores de posición en la parte shell de la regla se sustituyen por valores
   basados en los comodines elegidos"
 
 :::
+
 

@@ -5,17 +5,23 @@ exercises: 20
 ---
 
 
+
 ::: objectives
+
 
 - "Define reglas para ejecutar localmente y en el cluster"
 
 :::
 
+
+
 ::: questions
+
 
 - "¿Cómo ejecuto mi regla de Snakemake en el cluster?"
 
 :::
+
 
 ¿Qué ocurre cuando queremos que nuestra regla se ejecute en el cluster en lugar de en el
 nodo de inicio de sesión? El cluster que estamos usando utiliza Slurm, y sucede que
@@ -43,21 +49,31 @@ vuelven a ejecutar para actualizar el objetivo. Usando este enfoque, Snakemake s
 sólo debe reconstruir los archivos que, directa o indirectamente, dependen del archivo
 que cambió. Esto se llama una _construcción incremental_.
 
+
 ::: callout
+
 ## Las construcciones incrementales mejoran la eficiencia
 
-Al reconstruir archivos sólo cuando es necesario, Snakemake hace que su procesamiento
-sea más eficiente. :::
+Al reconstruir los archivos sólo cuando es necesario, Snakemake hace que su
+procesamiento sea más eficiente.
+
+:::
+
+
 
 ::: challenge
+
 ## Ejecutando en el cluster
 
 Ahora necesitamos otra regla que ejecute el `hostname` en el _cluster_. Crea una nueva
 regla en tu Snakefile e intenta ejecutarla en el cluster con la opción `--executor
 slurm` a `snakemake`.
 
-:::::: solution The rule is almost identical to the previous rule save for the rule name
-and output file:
+
+:::::: solution
+
+La regla es casi idéntica a la regla anterior excepto por el nombre de la regla y el
+archivo de salida:
 
 ```python
 rule hostname_remote:
@@ -123,9 +139,13 @@ y podemos echar un vistazo al archivo de salida que crea la nueva regla,
 tmpnode1.int.jetstream2.hpc-carpentry.org
 ```
 
+
 ::::::
 
+
+
 :::
+
 
 ## Perfil de Snakemake
 
@@ -178,7 +198,7 @@ ayuda de una tabla de traducción:
 
 Las advertencias dadas por Snakemake dieron a entender que podríamos necesitar
 proporcionar estas opciones. Una forma de hacerlo es proporcionarlas como parte de la
-regla de Snakemake usando la palabra clave `resources`, por ejemplo,
+regla de Snakemake utilizando la palabra clave `resources`, por ejemplo,
 
 ```python
 rule:
@@ -202,10 +222,15 @@ default-resources:
   - mem_mb_per_cpu=3600
 ```
 
-:::challenge We know that our problem runs in a very short time. Change the default
-length of our jobs to two minutes for Slurm.
+
+:::challenge
+
+Sabemos que nuestro problema se ejecuta en muy poco tiempo. Cambia la duración por
+defecto de nuestros trabajos a dos minutos para Slurm.
+
 
 ::::::solution
+
 
 ```yaml
 printshellcmds: True
@@ -216,9 +241,13 @@ default-resources:
   - runtime=2
 ```
 
+
 ::::::
 
+
+
 :::
+
 
 Existen varias opciones `sbatch` no soportadas directamente por las definiciones de
 recursos de la tabla anterior. Puede utilizar el recurso `slurm_extra` para especificar
@@ -253,7 +282,9 @@ cerca de la parte superior de nuestro `Snakefile`.
 localrules: hostname_login
 ```
 
+
 ::: keypoints
+
 
 - "Snakemake genera y envía sus propios scripts por lotes para su planificador."
 - "Puedes almacenar parámetros de configuración por defecto en un perfil de Snakemake"
@@ -261,4 +292,5 @@ localrules: hostname_login
   cluster."
 
 :::
+
 
