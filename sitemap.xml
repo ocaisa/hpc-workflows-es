@@ -28,6 +28,12 @@
     <loc>https://carpentries-incubator.github.io/hpc-workflows/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/hpc-workflows/aio.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/hpc-workflows/images.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/hpc-workflows/index.html</loc>
   </url>
   <url>
@@ -58,13 +64,31 @@
     <loc>https://carpentries-incubator.github.io/hpc-workflows/instructor/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/hpc-workflows/instructor/aio.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/hpc-workflows/instructor/images.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/hpc-workflows/instructor/index.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/hpc-workflows/instructor/instructor-notes.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/hpc-workflows/instructor/key-points.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/hpc-workflows/instructor/profiles.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/hpc-workflows/instructor/reference.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/hpc-workflows/instructor-notes.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/hpc-workflows/key-points.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/hpc-workflows/profiles.html</loc>
