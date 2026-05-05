@@ -535,35 +535,35 @@ usarlas para poder enviar trabajos al cluster al que tienes acceso.
 Desafortunadamente, los nombres de las opciones en Snakemake no son
 <em>exactamente</em> los mismos que los de Slurm, por lo que necesitamos
 la ayuda de una tabla de traducción:</p>
-<table class="table"><colgroup><col width="17%"><col width="17%"><col width="64%"></colgroup><thead><tr class="header"><th>SLURM</th>
+<table class="table"><colgroup><col width="17%"><col width="17%"><col width="64%"></colgroup><thead><tr><th>SLURM</th>
 <th>Snakemake</th>
 <th>Description</th>
-</tr></thead><tbody><tr class="odd"><td><code>--partition</code></td>
+</tr></thead><tbody><tr><td><code>--partition</code></td>
 <td><code>slurm_partition</code></td>
 <td>the partition a rule/job is to use</td>
-</tr><tr class="even"><td><code>--time</code></td>
+</tr><tr><td><code>--time</code></td>
 <td><code>runtime</code></td>
 <td>the walltime per job in minutes</td>
-</tr><tr class="odd"><td><code>--constraint</code></td>
+</tr><tr><td><code>--constraint</code></td>
 <td><code>constraint</code></td>
 <td>may hold features on some clusters</td>
-</tr><tr class="even"><td><code>--mem</code></td>
+</tr><tr><td><code>--mem</code></td>
 <td><code>mem, mem_mb</code></td>
 <td>memory a cluster node must</td>
-</tr><tr class="odd"><td></td>
+</tr><tr><td></td>
 <td></td>
 <td>provide (mem: string with unit), mem_mb: int</td>
-</tr><tr class="even"><td><code>--mem-per-cpu</code></td>
+</tr><tr><td><code>--mem-per-cpu</code></td>
 <td><code>mem_mb_per_cpu</code></td>
 <td>memory per reserved CPU</td>
-</tr><tr class="odd"><td><code>--ntasks</code></td>
+</tr><tr><td><code>--ntasks</code></td>
 <td><code>tasks</code></td>
 <td>number of concurrent tasks / ranks</td>
-</tr><tr class="even"><td><code>--cpus-per-task</code></td>
+</tr><tr><td><code>--cpus-per-task</code></td>
 <td><code>cpus_per_task</code></td>
 <td>number of cpus per task (in case of SMP, rather use
 <code>threads</code>)</td>
-</tr><tr class="odd"><td><code>--nodes</code></td>
+</tr><tr><td><code>--nodes</code></td>
 <td><code>nodes</code></td>
 <td>number of nodes</td>
 </tr></tbody></table><p>Las advertencias dadas por Snakemake dieron a entender que podríamos
@@ -744,7 +744,7 @@ any links that you are not going to use.
   "identifier": "https://carpentries-incubator.github.io/hpc-workflows/02-snakemake_on_the_cluster.html",
   "dateCreated": "2023-04-19",
   "dateModified": "2024-11-25",
-  "datePublished": "2026-04-28"
+  "datePublished": "2026-05-05"
 }
 
   </script><script>
